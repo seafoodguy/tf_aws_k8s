@@ -7,7 +7,7 @@
   become_user: root
   tasks:
     - name: create the k8suser user account
-      user: name=k8suser append=yes state=present createhome=yes shell=/bin/bash
+      user: name=k8suser append=yes group=k8suser state=present createhome=yes shell=/bin/bash
 
     - name: allow 'k8suser' to use sudo without needing a password
       lineinfile:
@@ -18,4 +18,4 @@
     - name: set up authorized keys for the k8suser user
       authorized_key: user=k8suser key="{{item}}"
       with_file:
-        - ../tf_sshkey/id_rsa.pub
+        - ~/.ssh/id_rsa.pub
