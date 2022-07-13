@@ -1,17 +1,21 @@
 #Ansible Jenkins Master, sample playbook - jenkins-master-sample.yml
 ---
-- hosts: tag_Name_aws_sandbox_tf_1
-  #hosts: "{{ passed_in_hosts }}"
+- hosts: "{{ passed_in_hosts }}"
+  #hosts: tag_Name_aws_sandbox_tf_1 
   become: yes
   remote_user: ec2-user
   become_user: root
   tasks:
-    - name: install httpd
-      yum:
-        name: httpd
-        state: present
-    - name: start httpd
-      service:
-        name: httpd
-        state: started
-        enabled: yes
+    - name: create the k8suser user account
+      user: name=k8suser append=yes state=present createhome=yes shell=/bin/bash
+
+    - name: allow 'k8suser' to use sudo without needing a password
+      lineinfile:
+        dest: /etc/sudoers
+        line: 'k8suser ALL=(ALL) NOPASSWD: ALL'
+        validate: 'visudo -cf %s'
+
+    - name: set up authorized keys for the k8suser user
+      authorized_key: user=k8suser key="{{item}}"
+      with_file:
+        - ../tf_sshkey/id_rsa.pub
