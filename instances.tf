@@ -37,7 +37,7 @@ EOF
   }
 }
 
-#ansible-playbook --extra-vars 'passed_in_hosts=tag_Name_${self.tags.Name}' ansible_templates/jenkins-master-sample.yml
+#ansible-playbook --extra-vars 'passed_in_hosts=tag_Name_aws_sandbox_tf_1' ansible_templates/aws_k8s.yml
 
 
 #Create SG for allowing TCP/8080 from * and TCP/22 from your IP in use-east-1

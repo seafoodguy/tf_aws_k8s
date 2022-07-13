@@ -7,7 +7,8 @@
   become_user: root
   tasks:
     - name: create the k8suser user account
-      user: name=k8suser append=yes groups=k8suser state=present createhome=yes shell=/bin/bash
+      user: name=k8suser state=present createhome=yes shell=/bin/bash
+      #user: name=k8suser append=yes groups=k8suser state=present createhome=yes shell=/bin/bash
 
     - name: allow 'k8suser' to use sudo without needing a password
       lineinfile:
