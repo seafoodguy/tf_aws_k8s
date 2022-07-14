@@ -16,7 +16,7 @@
         state: directory
         owner: k8suser
         group: k8suser
-        mode: '0600'
+        mode: '0700'
 
     - name: allow 'k8suser' to use sudo without needing a password
       lineinfile:
