@@ -32,6 +32,11 @@
         group: k8suser
         mode: '0600'
 
+- hosts: "{{ passed_in_hosts }}"
+  become: yes
+  remote_user: k8suser
+  become_user: root
+  tasks:
     - name: Create containerd config file
       file:
         path: "/etc/modules-load.d/containerd.conf"
