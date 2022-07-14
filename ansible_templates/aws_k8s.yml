@@ -1,13 +1,5 @@
 #Ansible Jenkins Master, sample playbook - jenkins-master-sample.yml
 ---
-- hosts: localhost
-  become: yes
-  tasks:
-    - name:
-      lineinfile:
-        line: "{{item}}"
-        path: ./tf_hosts.txt
-      with_items: "{{ passed_in_hosts }}"
 - hosts: "{{ passed_in_hosts }}"
   #hosts: tag_Name_aws_sandbox_tf_1 
   become: yes
