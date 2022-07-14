@@ -99,7 +99,7 @@
   become_user: root
   tasks:
     - name: initialize the cluster
-      shell: kubeadm init --pod-network-cidr=10.244.0.0/16
+      shell: kubeadm init --pod-network-cidr=10.244.0.0/16 --ignore-preflight-errors all
       args:
         chdir: $HOME
         creates: cluster_initialized.txt
