@@ -26,7 +26,7 @@
 
     - name: copy key file to specific location
       copy:
-        src: ../tf_sshkey/id_rsa.pub
+        src: id_rsa.pub
         dest: /home/k8suser/.ssh/id_rsa.pub
         owner: k8suser
         group: k8suser
