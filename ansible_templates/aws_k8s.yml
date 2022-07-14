@@ -10,13 +10,24 @@
       user: name=k8suser state=present createhome=yes shell=/bin/bash
       #user: name=k8suser append=yes groups=k8suser state=present createhome=yes shell=/bin/bash
 
+    - name: create directory for each user
+        file: 
+          path: /home/k8suser/.ssh
+          state: directory
+          owner: k8suser
+          group: k8suser
+          mode: '0600'
+
     - name: allow 'k8suser' to use sudo without needing a password
       lineinfile:
         dest: /etc/sudoers
         line: 'k8suser ALL=(ALL) NOPASSWD: ALL'
         validate: 'visudo -cf %s'
 
-    - name: set up authorized keys for the k8suser user
-      authorized_key: user=k8suser key="{{item}}"
-      with_file:
-        - ~/.ssh/id_rsa.pub
+    - name: copy key file to specific location
+      copy:
+        src: ../tf_sshkey/id_rsa.pub
+        dest: /home/k8suser/.ssh/id_rsa.pub
+        owner: k8suser
+        group: k8suser
+        mode: '0600'
