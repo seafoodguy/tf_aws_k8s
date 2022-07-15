@@ -61,6 +61,13 @@ resource "aws_security_group" "aws_sandbox_sg" {
     protocol    = "-1"
     self = true
   }
+  ingress {
+    description = "Allow any from any"
+    from_port   = 0
+    to_port     = 0
+    protocol    = "-1"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
   egress {
     from_port   = 0
     to_port     = 0
