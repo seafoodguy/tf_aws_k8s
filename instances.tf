@@ -32,6 +32,7 @@ resource "aws_instance" "aws_sandbox" {
   provisioner "local-exec" {
     command = <<EOF
 aws --profile ${var.profile} ec2 wait instance-status-ok --region ${var.region-master} --instance-ids ${self.id}
+ansible-playbook --extra-vars 'passed_in_hosts=tag_Name_${self.tags.Name}' ansible_templates/aws_k8s.yml
 EOF
   }
 }
