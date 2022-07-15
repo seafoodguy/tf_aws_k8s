@@ -12,5 +12,5 @@
         mode=0755
     - name: gather hostvar
       lineinfile:
-        line: k8smaster= hostvars[tag_Name_aws_sandbox_tf_1]['ansible_default_ipv4']['address']
+        line: k8smaster= "hostvars[tag_Name_aws_sandbox_tf_1]['ansible_default_ipv4']['address']"
         path: ./tf_hosts.txt
