@@ -4,12 +4,6 @@
   become_user: root
   gather_facts: yes
   tasks:
-    - name: create
-      file:
-        dest=./tf_hosts.txt
-        state=touch 
-        owner=root
-        mode=0755
     - name: gather hostvar
       lineinfile:
         line: k8smaster= "{{hostvars[tag_Name_aws_sandbox_tf_1]['ansible_default_ipv4']['address']}}"
