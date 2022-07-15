@@ -55,3 +55,20 @@
      become: yes
      command: sh /tmp/kubernetes_join_command
      register: joined_or_not
+
+#install rancher
+- hosts: tag_Name_aws_sandbox_tf_1 
+  remote_user: k8suser
+  tasks:
+    - name: install Rancher by Helm and Install cert-manager
+        shell: |
+                 curl -fsSL -o get_helm.sh https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3
+                 chmod 700 get_helm.sh
+                 ./get_helm.sh
+                 helm repo add rancher-stable https://releases.rancher.com/server-charts/stable
+                 helm repo add rancher-latest https://releases.rancher.com/server-charts/latest
+                 helm repo add jetstack https://charts.jetstack.io
+                 helm repo update
+                 kubectl create namespace cattle-system
+                 helm install cert-manager jetstack/cert-manager --namespace cert-manager --create-namespace --version v1.5.1 --set installCRDs=true
+                 helm install rancher rancher-latest/rancher --namespace cattle-system --set hostname=ip-10-0-1-26.ec2.internal --set bootstrapPassword=admin
