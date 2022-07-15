@@ -72,4 +72,6 @@
                helm repo update
                kubectl create namespace cattle-system
                helm install cert-manager jetstack/cert-manager --namespace cert-manager --create-namespace --version v1.5.1 --set installCRDs=true
-               helm install rancher rancher-latest/rancher --namespace cattle-system --set hostname=ip-10-0-1-26.ec2.internal --set bootstrapPassword=admin
+               helm install rancher rancher-latest/rancher --namespace cattle-system --set hostname=aws-k8s.com --set bootstrapPassword=admin
+               sleep 10
+               kubectl patch svc rancher -n cattle-system -p '{"spec": {"type": "NodePort"}}'
