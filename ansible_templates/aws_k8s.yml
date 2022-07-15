@@ -1,6 +1,6 @@
 #Ansible Jenkins Master, sample playbook - jenkins-master-sample.yml
 ---
-- hosts: tag_Name_aws_sandbox_tf_1
+- hosts: "{{ passed_in_hosts }}"
   #hosts: tag_Name_aws_sandbox_tf_1  "{{ passed_in_hosts }}"
   become: yes
   remote_user: ec2-user
@@ -32,7 +32,7 @@
         group: k8suser
         mode: '0600'
 
-- hosts: tag_Name_aws_sandbox_tf_1
+- hosts: "{{ passed_in_hosts }}"
   become: yes
   remote_user: k8suser
   become_user: root
