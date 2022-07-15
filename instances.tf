@@ -54,6 +54,13 @@ resource "aws_security_group" "aws_sandbox_sg" {
     protocol    = "tcp"
     cidr_blocks = [var.external_ip]
   }
+  ingress {
+    description = "Allow any from aws_sandbox_sg"
+    from_port   = 0
+    to_port     = 0
+    protocol    = "tcp"
+    security_groups = [aws_security_group.aws_sandbox_sg.id]
+  }
   egress {
     from_port   = 0
     to_port     = 0
