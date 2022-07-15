@@ -4,7 +4,10 @@
   become_user: root
   gather_facts: yes
   tasks:
-    - name: set variable
-      shell: |
-               k8smasterip=$(terraform output -json aws_sandbox-Public-IPs | jq -r '.aws_sandbox_tf_1')
-               k8snode2ip=$(terraform output -json aws_sandbox-Public-IPs | jq -r '.aws_sandbox_tf_2')
+    - name: set permission
+      file:
+        path: ./setlocalvar.sh
+        mode: u+x
+    - name: Run a script with arguments (using 'cmd' parameter)
+      script:
+        cmd: ./setlocalvar.sh
