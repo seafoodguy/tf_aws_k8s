@@ -4,7 +4,7 @@
   become_user: root
   gather_facts: yes
   tasks:
-    - name: gather hostvar
-      lineinfile:
-        line: "{{hostvars['tag_Name_aws_sandbox_tf_1'].ansible_default_ipv4.address}}"
-        path: ./tf_hosts.txt
+    - name: set variable
+      shell: |
+               k8smasterip=$(terraform output -json aws_sandbox-Public-IPs | jq -r '.aws_sandbox_tf_1')
+               k8snode2ip=$(terraform output -json aws_sandbox-Public-IPs | jq -r '.aws_sandbox_tf_2')
