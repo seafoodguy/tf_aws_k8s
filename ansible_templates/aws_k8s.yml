@@ -30,7 +30,6 @@
         dest: /home/k8suser/.ssh/authorized_keys
         owner: k8suser
         group: k8suser
-        mode: '0600'
 
 - hosts: "{{ passed_in_hosts }}"
   become: yes
