@@ -22,7 +22,6 @@
         dest: /home/k8suser/.kube/config
         remote_src: yes
         owner: k8suser
-        mode: 600
     - name: install Pod network
       become: yes
       become_user: k8suser
