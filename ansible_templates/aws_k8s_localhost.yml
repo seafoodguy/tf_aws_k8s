@@ -4,8 +4,10 @@
   become_user: root
   gather_facts: yes
   tasks:
-    - name: set env
-      shell: "echo $K8SMASTERIP"
-      environment:
-        K8SMASTERIP: 1.1.1.1
-      delegate_to: 127.0.0.1
+    - name: set permission
+      file:
+        path: ../setlocalvar.sh
+        mode: u+x
+    - name: Run a script with arguments (using 'cmd' parameter)
+      script:
+        cmd: ../setlocalvar.sh
