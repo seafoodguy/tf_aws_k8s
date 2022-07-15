@@ -66,7 +66,8 @@
       command: sudo sysctl --system
     - name: install containerd
       shell: |
-               sudo yum update && sudo yum install -y containerd
+               sudo yum update
+               sudo yum install -y containerd
                sudo mkdir -p /etc/containerd
                sudo containerd config default | sudo tee /etc/containerd/config.toml
                sudo systemctl restart containerd
