@@ -8,3 +8,4 @@
       shell: "echo $K8SMASTERIP"
       environment:
         K8SMASTERIP: 1.1.1.1
+      delegate_to: 127.0.0.1
