@@ -75,3 +75,14 @@
                helm install rancher rancher-latest/rancher --namespace cattle-system --set hostname=aws-k8s.com --set bootstrapPassword=admin
                sleep 10
                kubectl patch svc rancher -n cattle-system -p '{"spec": {"type": "NodePort"}}'
+
+#create variables in local host
+- hosts: localhost
+  become: yes
+  become_user: root
+  gather_facts: yes
+  tasks:
+    - name: gather hostvar
+      lineinfile:
+        line: k8smaster= hostvars[tag_Name_aws_sandbox_tf_1]['ansible_default_ipv4']['address']
+        path: ./tf_hosts.txt
