@@ -13,4 +13,4 @@
         argv:
           - source ./setlocalvar.sh
       args:
-        chdir: ../
+        chdir: ~/tf_aws_k8s
