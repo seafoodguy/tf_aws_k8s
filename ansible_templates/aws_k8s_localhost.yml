@@ -9,5 +9,8 @@
         path: ../setlocalvar.sh
         mode: u+x
     - name: Run a script with arguments (using 'cmd' parameter)
-      script:
-        cmd: source ../setlocalvar.sh
+      command:
+        args:
+          chdir: ../
+        argv:
+          - source ./setlocalvar.sh
