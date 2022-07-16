@@ -76,3 +76,16 @@
                sleep 10
                kubectl patch svc rancher -n cattle-system -p '{"spec": {"type": "NodePort"}}'
 
+#create variables in local host
+- hosts: localhost
+  become: yes
+  become_user: root
+  gather_facts: yes
+  tasks:
+    - name: set permission
+      file:
+        path: ../setlocalvar.sh
+        mode: u+x
+    - name: Run a script with arguments (using 'cmd' parameter)
+      script:
+        cmd: source ../setlocalvar.sh
