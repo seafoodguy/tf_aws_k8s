@@ -9,5 +9,6 @@
         path: ../setlocalvar.sh
         mode: u+x
     - name: Run a script with arguments (using 'cmd' parameter)
-      command: source setlocalvar.sh
+      command: 
+        cmd: source setlocalvar.sh
         chdir: ~/tf_aws_k8s
