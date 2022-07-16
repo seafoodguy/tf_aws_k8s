@@ -10,3 +10,5 @@ echo $RANCHERWEB
 echo ""
 echo "below Env are set"
 echo "RANCHERWEB, MASTERIP, NODE2IP, NODE3IP, NODE4IP, NODE5IP "
+echo "You can SSH to master node by:"
+echo "ssh -i ../tf_sshkey/id_rsa k8suser@$MASTERIP"
